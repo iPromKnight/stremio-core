@@ -1,5 +1,4 @@
 use std::{collections::HashMap, sync::RwLock};
-
 use chrono::{offset::TimeZone, DateTime, Utc};
 use futures::{future, Future, FutureExt, TryFutureExt};
 use gloo_utils::format::JsValueSerdeExt;
@@ -40,6 +39,8 @@ extern "C" {
     static APP_VERSION: String;
     #[wasm_bindgen(js_namespace = ["self"], js_name = shell_version)]
     static SHELL_VERSION: Option<String>;
+    #[wasm_bindgen(js_namespace = ["self"], js_name = api_endpoint)]
+    static API_URL: String;
     #[wasm_bindgen(catch, js_namespace = ["self"])]
     async fn get_location_hash() -> Result<JsValue, JsValue>;
     #[wasm_bindgen(catch, js_namespace = ["self"])]
@@ -48,6 +49,15 @@ extern "C" {
     async fn local_storage_set_item(key: String, value: String) -> Result<(), JsValue>;
     #[wasm_bindgen(catch, js_namespace = ["self"])]
     async fn local_storage_remove_item(key: String) -> Result<(), JsValue>;
+
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: &str);
+}
+
+macro_rules! console_log {
+    // Note that this is using the `log` function imported above during
+    // `bare_bones`
+    ($($t:tt)*) => (log(&format_args!($($t)*).to_string()))
 }
 
 static INSTALLATION_ID: Lazy<RwLock<Option<String>>> = Lazy::new(Default::default);
@@ -80,6 +90,7 @@ pub enum WebEnv {}
 impl WebEnv {
     /// Sets panic hook, enables logging
     pub fn init() -> TryEnvFuture<()> {
+        console_log!("Api Endpoint {}", API_URL.as_str());
         WebEnv::migrate_storage_schema()
             .inspect(|migration_result| trace!("Migration result: {migration_result:?}",))
             .and_then(|_| WebEnv::get_storage::<String>(INSTALLATION_ID_STORAGE_KEY))
@@ -260,6 +271,10 @@ impl WebEnv {
 }
 
 impl Env for WebEnv {
+    fn api_endpoint() -> Url {
+        Url::parse(&API_URL).expect("API URL is not a valid URL")
+    }
+
     fn fetch<IN, OUT>(request: Request<IN>) -> TryEnvFuture<OUT>
     where
         IN: Serialize,

@@ -33,7 +33,7 @@ fn data_export_fetch_handler(request: Request) -> TryEnvFuture<Box<dyn Any + Sen
     match request {
         Request {
             url, method, body, ..
-        } if url == "https://api.strem.io/api/dataExport"
+        } if url == "https://localhost:8080/api/dataExport"
             && method == "POST"
             && &body == r#"{"type":"DataExport","authKey":"user_key"}"# =>
         {
@@ -110,7 +110,7 @@ fn data_export_with_user() {
         &Some((
             AuthKey("user_key".into()),
             Loadable::Ready(
-                "https://api.strem.io/data-export/user_export_id/export.json"
+                "https://localhost:8080/data-export/user_export_id/export.json"
                     .parse()
                     .unwrap()
             )
@@ -121,7 +121,7 @@ fn data_export_with_user() {
     assert_eq!(
         requests[0],
         Request {
-            url: "https://api.strem.io/api/dataExport".to_owned(),
+            url: "https://localhost:8080/api/dataExport".to_owned(),
             method: "POST".to_owned(),
             headers: Default::default(),
             body: r#"{"type":"DataExport","authKey":"user_key"}"#.to_owned(),

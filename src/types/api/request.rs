@@ -1,6 +1,5 @@
 use core::fmt;
 
-use crate::constants::{API_URL, LINK_API_URL};
 use crate::types::addon::Descriptor;
 use crate::types::library::LibraryItem;
 use crate::types::profile::{AuthKey, GDPRConsent, User};
@@ -10,13 +9,10 @@ use chrono::{DateTime, Local};
 use derivative::Derivative;
 use http::Method;
 use serde::{Deserialize, Serialize};
-use url::Url;
 
 pub trait FetchRequestParams<T> {
     /// Version path prefix for the request
     const VERSION: &'static str = "";
-
-    fn endpoint(&self) -> Url;
     fn method(&self) -> Method;
     fn path(&self) -> String;
 
@@ -142,9 +138,6 @@ pub struct SkipGapsRequest {
 }
 
 impl FetchRequestParams<APIRequest> for APIRequest {
-    fn endpoint(&self) -> Url {
-        API_URL.to_owned()
-    }
     fn method(&self) -> Method {
         Method::POST
     }
@@ -250,10 +243,6 @@ impl LinkRequest {}
 
 impl FetchRequestParams<()> for LinkRequest {
     const VERSION: &'static str = "v2";
-
-    fn endpoint(&self) -> Url {
-        LINK_API_URL.to_owned()
-    }
     fn method(&self) -> Method {
         Method::GET
     }
@@ -279,9 +268,6 @@ pub struct DatastoreRequest {
 }
 
 impl FetchRequestParams<DatastoreRequest> for DatastoreRequest {
-    fn endpoint(&self) -> Url {
-        API_URL.to_owned()
-    }
     fn method(&self) -> Method {
         Method::POST
     }
@@ -329,9 +315,6 @@ mod tests {
         struct V2Request;
         impl FetchRequestParams<()> for V2Request {
             const VERSION: &'static str = "v2";
-            fn endpoint(&self) -> url::Url {
-                "https://example.com/".parse().unwrap()
-            }
 
             fn method(&self) -> Method {
                 Method::POST

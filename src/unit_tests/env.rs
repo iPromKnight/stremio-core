@@ -10,7 +10,7 @@ use enclose::enclose;
 use futures::{channel::mpsc::Receiver, future, Future, StreamExt, TryFutureExt};
 use once_cell::sync::Lazy;
 use serde::{Deserialize, Serialize};
-
+use url::Url;
 use crate::{
     models::{ctx::Ctx, streaming_server::StreamingServer},
     runtime::{Env, EnvFuture, EnvFutureExt, Model, Runtime, RuntimeEvent, TryEnvFuture},
@@ -106,6 +106,9 @@ impl TestEnv {
 }
 
 impl Env for TestEnv {
+    fn api_endpoint() -> Url {
+        Url::parse("https://localhost:8080").expect("API URL is not a valid URL")
+    }
     fn fetch<IN: Serialize + 'static, OUT: for<'de> Deserialize<'de> + 'static>(
         request: http::Request<IN>,
     ) -> TryEnvFuture<OUT> {

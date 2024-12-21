@@ -104,7 +104,7 @@ fn actionctx_installaddon_install_with_user() {
         match request {
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/addonCollectionSet"
+            } if url == "https://localhost:8080/api/addonCollectionSet"
                 && method == "POST"
                 && body == "{\"type\":\"AddonCollectionSet\",\"authKey\":\"auth_key\",\"addons\":[{\"manifest\":{\"id\":\"id\",\"version\":\"0.0.1\",\"name\":\"name\",\"contactEmail\":null,\"description\":null,\"logo\":null,\"background\":null,\"types\":[],\"resources\":[],\"idPrefixes\":null,\"catalogs\":[],\"addonCatalogs\":[],\"behaviorHints\":{\"adult\":false,\"p2p\":false,\"configurable\":false,\"configurationRequired\":false}},\"transportUrl\":\"https://transport_url/\",\"flags\":{\"official\":false,\"protected\":false}}]}" =>
             {
@@ -201,7 +201,7 @@ fn actionctx_installaddon_install_with_user() {
     assert_eq!(
         REQUESTS.read().unwrap().first().unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/addonCollectionSet".to_owned(),
+            url: "https://localhost:8080/api/addonCollectionSet".to_owned(),
             method: "POST".to_owned(),
             body: "{\"type\":\"AddonCollectionSet\",\"authKey\":\"auth_key\",\"addons\":[{\"manifest\":{\"id\":\"id\",\"version\":\"0.0.1\",\"name\":\"name\",\"contactEmail\":null,\"description\":null,\"logo\":null,\"background\":null,\"types\":[],\"resources\":[],\"idPrefixes\":null,\"catalogs\":[],\"addonCatalogs\":[],\"behaviorHints\":{\"adult\":false,\"p2p\":false,\"configurable\":false,\"configurationRequired\":false}},\"transportUrl\":\"https://transport_url/\",\"flags\":{\"official\":false,\"protected\":false}}]}"
                 .to_owned(),

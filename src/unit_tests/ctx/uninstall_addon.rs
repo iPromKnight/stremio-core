@@ -158,7 +158,7 @@ fn actionctx_uninstalladdon_with_user() {
         match request {
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/addonCollectionSet"
+            } if url == "https://localhost:8080/api/addonCollectionSet"
                 && method == "POST"
                 && body == "{\"type\":\"AddonCollectionSet\",\"authKey\":\"auth_key\",\"addons\":[]}" =>
             {
@@ -263,7 +263,7 @@ fn actionctx_uninstalladdon_with_user() {
     assert_eq!(
         REQUESTS.read().unwrap().first().unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/addonCollectionSet".to_owned(),
+            url: "https://localhost:8080/api/addonCollectionSet".to_owned(),
             method: "POST".to_owned(),
             body: "{\"type\":\"AddonCollectionSet\",\"authKey\":\"auth_key\",\"addons\":[]}"
                 .to_owned(),

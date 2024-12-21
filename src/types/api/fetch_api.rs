@@ -14,8 +14,7 @@ pub fn fetch_api<
 >(
     api_request: &REQ,
 ) -> TryEnvFuture<APIResult<RESP>> {
-    let mut url = api_request
-        .endpoint()
+    let mut url = E::api_endpoint()
         .join("api/")
         .expect("url builder failed")
         .join(&api_request.version_path())

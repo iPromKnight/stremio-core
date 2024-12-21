@@ -70,7 +70,7 @@ fn actionctx_authenticate_login() {
         match request {
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/login"
+            } if url == "https://localhost:8080/api/login"
                 && method == "POST"
                 && body == "{\"type\":\"Auth\",\"type\":\"Login\",\"email\":\"user_email\",\"password\":\"user_password\",\"facebook\":false}" =>
             {
@@ -78,7 +78,7 @@ fn actionctx_authenticate_login() {
             }
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/addonCollectionGet"
+            } if url == "https://localhost:8080/api/addonCollectionGet"
                 && method == "POST"
                 && body == "{\"type\":\"AddonCollectionGet\",\"authKey\":\"auth_key\",\"update\":true}" =>
             {
@@ -91,7 +91,7 @@ fn actionctx_authenticate_login() {
             }
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/datastoreGet"
+            } if url == "https://localhost:8080/api/datastoreGet"
                 && method == "POST"
                 && body == "{\"authKey\":\"auth_key\",\"collection\":\"libraryItem\",\"ids\":[],\"all\":true}" =>
             {
@@ -171,7 +171,7 @@ fn actionctx_authenticate_login() {
     assert_eq!(
         REQUESTS.read().unwrap().first().unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/login".to_owned(),
+            url: "https://localhost:8080/api/login".to_owned(),
             method: "POST".to_owned(),
             body: "{\"type\":\"Auth\",\"type\":\"Login\",\"email\":\"user_email\",\"password\":\"user_password\",\"facebook\":false}".to_owned(),
             ..Default::default()
@@ -181,7 +181,7 @@ fn actionctx_authenticate_login() {
     assert_eq!(
         REQUESTS.read().unwrap().get(1).unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/addonCollectionGet".to_owned(),
+            url: "https://localhost:8080/api/addonCollectionGet".to_owned(),
             method: "POST".to_owned(),
             body: "{\"type\":\"AddonCollectionGet\",\"authKey\":\"auth_key\",\"update\":true}"
                 .to_owned(),
@@ -192,7 +192,7 @@ fn actionctx_authenticate_login() {
     assert_eq!(
         REQUESTS.read().unwrap().get(2).unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/datastoreGet".to_owned(),
+            url: "https://localhost:8080/api/datastoreGet".to_owned(),
             method: "POST".to_owned(),
             body:
                 "{\"authKey\":\"auth_key\",\"collection\":\"libraryItem\",\"ids\":[],\"all\":true}"
@@ -214,7 +214,7 @@ fn actionctx_authenticate_login_with_token() {
         match request {
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/loginWithToken"
+            } if url == "https://localhost:8080/api/loginWithToken"
                 && method == "POST"
                 && body == "{\"type\":\"Auth\",\"type\":\"LoginWithToken\",\"token\":\"auth_key\"}" =>
             {
@@ -222,7 +222,7 @@ fn actionctx_authenticate_login_with_token() {
             }
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/addonCollectionGet"
+            } if url == "https://localhost:8080/api/addonCollectionGet"
                 && method == "POST"
                 && body == "{\"type\":\"AddonCollectionGet\",\"authKey\":\"auth_key\",\"update\":true}" =>
             {
@@ -235,7 +235,7 @@ fn actionctx_authenticate_login_with_token() {
             }
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/datastoreGet"
+            } if url == "https://localhost:8080/api/datastoreGet"
                 && method == "POST"
                 && body == "{\"authKey\":\"auth_key\",\"collection\":\"libraryItem\",\"ids\":[],\"all\":true}" =>
             {
@@ -311,7 +311,7 @@ fn actionctx_authenticate_login_with_token() {
     assert_eq!(
         REQUESTS.read().unwrap().first().unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/loginWithToken".to_owned(),
+            url: "https://localhost:8080/api/loginWithToken".to_owned(),
             method: "POST".to_owned(),
             body: "{\"type\":\"Auth\",\"type\":\"LoginWithToken\",\"token\":\"auth_key\"}"
                 .to_owned(),
@@ -322,7 +322,7 @@ fn actionctx_authenticate_login_with_token() {
     assert_eq!(
         REQUESTS.read().unwrap().get(1).unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/addonCollectionGet".to_owned(),
+            url: "https://localhost:8080/api/addonCollectionGet".to_owned(),
             method: "POST".to_owned(),
             body: "{\"type\":\"AddonCollectionGet\",\"authKey\":\"auth_key\",\"update\":true}"
                 .to_owned(),
@@ -333,7 +333,7 @@ fn actionctx_authenticate_login_with_token() {
     assert_eq!(
         REQUESTS.read().unwrap().get(2).unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/datastoreGet".to_owned(),
+            url: "https://localhost:8080/api/datastoreGet".to_owned(),
             method: "POST".to_owned(),
             body:
                 "{\"authKey\":\"auth_key\",\"collection\":\"libraryItem\",\"ids\":[],\"all\":true}"
@@ -355,7 +355,7 @@ fn actionctx_authenticate_facebook() {
         match request {
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/authWithFacebook"
+            } if url == "https://localhost:8080/api/authWithFacebook"
                 && method == "POST"
                 && body == "{\"type\":\"Auth\",\"type\":\"Facebook\",\"token\":\"access_token\"}" =>
             {
@@ -363,7 +363,7 @@ fn actionctx_authenticate_facebook() {
             }
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/addonCollectionGet"
+            } if url == "https://localhost:8080/api/addonCollectionGet"
                 && method == "POST"
                 && body == "{\"type\":\"AddonCollectionGet\",\"authKey\":\"auth_key\",\"update\":true}" =>
             {
@@ -376,7 +376,7 @@ fn actionctx_authenticate_facebook() {
             }
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/datastoreGet"
+            } if url == "https://localhost:8080/api/datastoreGet"
                 && method == "POST"
                 && body == "{\"authKey\":\"auth_key\",\"collection\":\"libraryItem\",\"ids\":[],\"all\":true}" =>
             {
@@ -452,7 +452,7 @@ fn actionctx_authenticate_facebook() {
     assert_eq!(
         REQUESTS.read().unwrap().first().unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/authWithFacebook".to_owned(),
+            url: "https://localhost:8080/api/authWithFacebook".to_owned(),
             method: "POST".to_owned(),
             body: "{\"type\":\"Auth\",\"type\":\"Facebook\",\"token\":\"access_token\"}".to_owned(),
             ..Default::default()
@@ -462,7 +462,7 @@ fn actionctx_authenticate_facebook() {
     assert_eq!(
         REQUESTS.read().unwrap().get(1).unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/addonCollectionGet".to_owned(),
+            url: "https://localhost:8080/api/addonCollectionGet".to_owned(),
             method: "POST".to_owned(),
             body: "{\"type\":\"AddonCollectionGet\",\"authKey\":\"auth_key\",\"update\":true}"
                 .to_owned(),
@@ -473,7 +473,7 @@ fn actionctx_authenticate_facebook() {
     assert_eq!(
         REQUESTS.read().unwrap().get(2).unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/datastoreGet".to_owned(),
+            url: "https://localhost:8080/api/datastoreGet".to_owned(),
             method: "POST".to_owned(),
             body:
                 "{\"authKey\":\"auth_key\",\"collection\":\"libraryItem\",\"ids\":[],\"all\":true}"
@@ -495,7 +495,7 @@ fn actionctx_authenticate_register() {
         match request {
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/register"
+            } if url == "https://localhost:8080/api/register"
                 && method == "POST"
                 && body == "{\"type\":\"Auth\",\"type\":\"Register\",\"email\":\"user_email\",\"password\":\"user_password\",\"gdpr_consent\":{\"tos\":true,\"privacy\":true,\"marketing\":false,\"from\":\"tests\"}}" =>
             {
@@ -503,7 +503,7 @@ fn actionctx_authenticate_register() {
             }
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/addonCollectionGet"
+            } if url == "https://localhost:8080/api/addonCollectionGet"
                 && method == "POST"
                 && body == "{\"type\":\"AddonCollectionGet\",\"authKey\":\"auth_key\",\"update\":true}" =>
             {
@@ -516,7 +516,7 @@ fn actionctx_authenticate_register() {
             }
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/datastoreGet"
+            } if url == "https://localhost:8080/api/datastoreGet"
                 && method == "POST"
                 && body == "{\"authKey\":\"auth_key\",\"collection\":\"libraryItem\",\"ids\":[],\"all\":true}" =>
             {
@@ -600,7 +600,7 @@ fn actionctx_authenticate_register() {
     assert_eq!(
         REQUESTS.read().unwrap().first().unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/register".to_owned(),
+            url: "https://localhost:8080/api/register".to_owned(),
             method: "POST".to_owned(),
             body: "{\"type\":\"Auth\",\"type\":\"Register\",\"email\":\"user_email\",\"password\":\"user_password\",\"gdpr_consent\":{\"tos\":true,\"privacy\":true,\"marketing\":false,\"from\":\"tests\"}}".to_owned(),
             ..Default::default()
@@ -610,7 +610,7 @@ fn actionctx_authenticate_register() {
     assert_eq!(
         REQUESTS.read().unwrap().get(1).unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/addonCollectionGet".to_owned(),
+            url: "https://localhost:8080/api/addonCollectionGet".to_owned(),
             method: "POST".to_owned(),
             body: "{\"type\":\"AddonCollectionGet\",\"authKey\":\"auth_key\",\"update\":true}"
                 .to_owned(),
@@ -621,7 +621,7 @@ fn actionctx_authenticate_register() {
     assert_eq!(
         REQUESTS.read().unwrap().get(2).unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/datastoreGet".to_owned(),
+            url: "https://localhost:8080/api/datastoreGet".to_owned(),
             method: "POST".to_owned(),
             body:
                 "{\"authKey\":\"auth_key\",\"collection\":\"libraryItem\",\"ids\":[],\"all\":true}"

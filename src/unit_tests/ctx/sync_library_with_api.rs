@@ -157,7 +157,7 @@ fn actionctx_synclibrarywithapi_with_user() {
         match &request {
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/datastoreMeta"
+            } if url == "https://localhost:8080/api/datastoreMeta"
                 && method == "POST"
                 && body == "{\"authKey\":\"auth_key\",\"collection\":\"libraryItem\"}" =>
             {
@@ -179,7 +179,7 @@ fn actionctx_synclibrarywithapi_with_user() {
             }
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/datastorePut" && method == "POST" => {
+            } if url == "https://localhost:8080/api/datastorePut" && method == "POST" => {
                 #[derive(Deserialize)]
                 #[serde(rename_all = "camelCase")]
                 struct Body {
@@ -207,7 +207,7 @@ fn actionctx_synclibrarywithapi_with_user() {
             }
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/datastoreGet" && method == "POST" => {
+            } if url == "https://localhost:8080/api/datastoreGet" && method == "POST" => {
                 #[derive(Deserialize)]
                 #[serde(rename_all = "camelCase")]
                 struct Body {
@@ -365,17 +365,17 @@ fn actionctx_synclibrarywithapi_with_user() {
     );
     assert_eq!(
         REQUESTS.read().unwrap().first().unwrap().url,
-        "https://api.strem.io/api/datastoreMeta".to_owned(),
+        "https://localhost:8080/api/datastoreMeta".to_owned(),
         "datastoreMeta request has been sent"
     );
     assert_eq!(
         REQUESTS.read().unwrap().get(1).unwrap().url,
-        "https://api.strem.io/api/datastorePut".to_owned(),
+        "https://localhost:8080/api/datastorePut".to_owned(),
         "datastorePut request has been sent"
     );
     assert_eq!(
         REQUESTS.read().unwrap().get(2).unwrap().url,
-        "https://api.strem.io/api/datastoreGet".to_owned(),
+        "https://localhost:8080/api/datastoreGet".to_owned(),
         "datastoreGet request has been sent"
     );
 }
@@ -391,7 +391,7 @@ fn actionctx_synclibrarywithapi_with_user_empty_library() {
         match &request {
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/datastoreMeta"
+            } if url == "https://localhost:8080/api/datastoreMeta"
                 && method == "POST"
                 && body == "{\"authKey\":\"auth_key\",\"collection\":\"libraryItem\"}" =>
             {
@@ -453,7 +453,7 @@ fn actionctx_synclibrarywithapi_with_user_empty_library() {
     );
     assert_eq!(
         REQUESTS.read().unwrap().first().unwrap().url,
-        "https://api.strem.io/api/datastoreMeta".to_owned(),
+        "https://localhost:8080/api/datastoreMeta".to_owned(),
         "datastoreMeta request has been sent"
     );
 }

@@ -29,7 +29,7 @@ fn actionctx_logout() {
         match request {
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/logout"
+            } if url == "https://localhost:8080/api/logout"
                 && method == "POST"
                 && body == "{\"type\":\"Logout\",\"authKey\":\"auth_key\"}" =>
             {
@@ -151,7 +151,7 @@ fn actionctx_logout() {
     assert_eq!(
         REQUESTS.read().unwrap().first().unwrap().to_owned(),
         Request {
-            url: "https://api.strem.io/api/logout".to_owned(),
+            url: "https://localhost:8080/api/logout".to_owned(),
             method: "POST".to_owned(),
             body: "{\"type\":\"Logout\",\"authKey\":\"auth_key\"}".to_owned(),
             ..Default::default()

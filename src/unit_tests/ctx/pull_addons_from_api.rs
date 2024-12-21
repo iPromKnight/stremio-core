@@ -93,7 +93,7 @@ fn actionctx_pulladdonsfromapi_with_user() {
         match request {
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/addonCollectionGet"
+            } if url == "https://localhost:8080/api/addonCollectionGet"
                 && method == "POST"
                 && body == "{\"type\":\"AddonCollectionGet\",\"authKey\":\"auth_key\",\"update\":true}" =>
             {
@@ -191,7 +191,7 @@ fn actionctx_pulladdonsfromapi_with_user() {
     );
     assert_eq!(
         REQUESTS.read().unwrap().first().unwrap().url,
-        "https://api.strem.io/api/addonCollectionGet".to_owned(),
+        "https://localhost:8080/api/addonCollectionGet".to_owned(),
         "addonCollectionGet request has been sent"
     );
 }

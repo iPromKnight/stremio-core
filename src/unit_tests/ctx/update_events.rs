@@ -18,7 +18,7 @@ use crate::{
 
 fn fetch_handler(request: Request) -> TryEnvFuture<Box<dyn Any + Send>> {
     match request {
-        Request { url, .. } if url == "https://api.strem.io/api/getModal" => {
+        Request { url, .. } if url == "https://localhost:8080/api/getModal" => {
             future::ok(Box::new(APIResult::Ok(Some(GetModalResponse {
                 id: "modal_id".to_owned(),
                 title: "title".to_owned(),
@@ -29,7 +29,7 @@ fn fetch_handler(request: Request) -> TryEnvFuture<Box<dyn Any + Send>> {
             }))) as Box<dyn Any + Send>)
             .boxed_env()
         }
-        Request { url, .. } if url == "https://api.strem.io/api/getNotification" => {
+        Request { url, .. } if url == "https://localhost:8080/api/getNotification" => {
             future::ok(Box::new(APIResult::Ok(Some(GetNotificationResponse {
                 id: "notification_id".to_owned(),
                 title: "title".to_owned(),

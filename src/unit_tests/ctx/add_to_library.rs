@@ -32,7 +32,7 @@ fn actionctx_addtolibrary() {
         match request {
             Request {
                 url, method, body, ..
-            } if url == "https://api.strem.io/api/datastorePut"
+            } if url == "https://localhost:8080/api/datastorePut"
                 && method == "POST"
                 && body == "{\"authKey\":\"auth_key\",\"collection\":\"libraryItem\",\"changes\":[{\"_id\":\"id\",\"name\":\"name\",\"type\":\"type\",\"poster\":null,\"posterShape\":\"poster\",\"removed\":false,\"temp\":false,\"_ctime\":\"2020-01-01T00:00:00Z\",\"_mtime\":\"2020-01-01T00:00:00Z\",\"state\":{\"lastWatched\":\"2020-01-01T00:00:00Z\",\"timeWatched\":0,\"timeOffset\":0,\"overallTimeWatched\":0,\"timesWatched\":0,\"flaggedWatched\":0,\"duration\":0,\"video_id\":null,\"watched\":null,\"noNotif\":false},\"behaviorHints\":{\"defaultVideoId\":null,\"featuredVideoId\":null,\"hasScheduledVideos\":false}}]}" =>
             {
@@ -160,7 +160,7 @@ fn actionctx_addtolibrary() {
     );
     assert_eq!(
         REQUESTS.read().unwrap().first().unwrap().url.to_owned(),
-        "https://api.strem.io/api/datastorePut".to_owned(),
+        "https://localhost:8080/api/datastorePut".to_owned(),
         "datastorePut request has been sent"
     );
 }
