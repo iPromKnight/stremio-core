@@ -109,6 +109,9 @@ impl Env for TestEnv {
     fn api_endpoint() -> Url {
         Url::parse("https://localhost:8080").expect("API URL is not a valid URL")
     }
+    fn api_key() -> Option<String> {
+        None
+    }
     fn fetch<IN: Serialize + 'static, OUT: for<'de> Deserialize<'de> + 'static>(
         request: http::Request<IN>,
     ) -> TryEnvFuture<OUT> {

@@ -138,6 +138,7 @@ pub type TryEnvFuture<T> = EnvFuture<'static, Result<T, EnvError>>;
 
 pub trait Env {
     fn api_endpoint() -> Url;
+    fn api_key() -> Option<String>;
     fn fetch<
         IN: Serialize + ConditionalSend + 'static,
         OUT: for<'de> Deserialize<'de> + ConditionalSend + 'static,
